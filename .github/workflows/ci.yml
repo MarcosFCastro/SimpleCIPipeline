@@ -1,0 +1,45 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-api:
+    name: Testes de API (Postman)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Instalar Newman
+        run: npm install -g newman
+      - name: Rodar testes Postman
+        run: newman run tests/api_collection.json --reporters cli
+
+  test-e2e:
+    name: Testes E2E (Cypress)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Instalar dependências
+        run: npm ci
+      - name: Rodar Cypress
+        run: npx cypress run
+
+  test-mobile:
+    name: Testes Mobile Simulados
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Instalar dependências
+        run: npm ci
+      - name: Rodar Jest simulando mobile
+        run: npx jest tests/mobile/

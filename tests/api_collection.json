@@ -1,0 +1,24 @@
+{
+  "info": {
+    "name": "API Sample Collection",
+    "_postman_id": "demo-id",
+    "description": "Coleção de teste de API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://postman-echo.com/get",
+          "protocol": "https",
+          "host": ["postman-echo", "com"],
+          "path": ["get"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
